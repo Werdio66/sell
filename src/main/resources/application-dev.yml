@@ -1,0 +1,13 @@
+spring:
+  # 数据库连接
+  datasource:
+    url: jdbc:mysql://localhost:3306/sell?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  # 配置 mapper 文件的目录
+  mapper-locations: classpath:mapper/*Dao.xml
+server:
+  port: 9999
