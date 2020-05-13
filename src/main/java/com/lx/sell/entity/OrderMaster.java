@@ -1,14 +1,20 @@
 package com.lx.sell.entity;
 
+import com.lx.sell.enums.OrderStatus;
+import com.lx.sell.enums.PayStatus;
+import lombok.Data;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
 /**
- * (OrderMaster)实体类
+ *  买家信息
  *
  * @author Werdio丶
  * @since 2020-05-12 12:39:26
  */
+@Data
 public class OrderMaster implements Serializable {
     private static final long serialVersionUID = -36779549667824587L;
     
@@ -32,15 +38,15 @@ public class OrderMaster implements Serializable {
     /**
     * 订单总金额
     */
-    private Double orderAmount;
+    private BigDecimal orderAmount;
     /**
-    * 订单状态, 默认为新下单
+    * 订单状态, 默认为 0, 新下单
     */
-    private Object orderStatus;
+    private Integer orderStatus = OrderStatus.NEW.getCode();
     /**
-    * 支付状态, 默认未支付
+    * 支付状态, 默认 0, 未支付
     */
-    private Object payStatus;
+    private Integer payStatus = PayStatus.WAIT.getCode();
     /**
     * 创建时间
     */
@@ -49,86 +55,4 @@ public class OrderMaster implements Serializable {
     * 修改时间
     */
     private LocalDateTime updateTime;
-
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getBuyerName() {
-        return buyerName;
-    }
-
-    public void setBuyerName(String buyerName) {
-        this.buyerName = buyerName;
-    }
-
-    public String getBuyerPhone() {
-        return buyerPhone;
-    }
-
-    public void setBuyerPhone(String buyerPhone) {
-        this.buyerPhone = buyerPhone;
-    }
-
-    public String getBuyerAddress() {
-        return buyerAddress;
-    }
-
-    public void setBuyerAddress(String buyerAddress) {
-        this.buyerAddress = buyerAddress;
-    }
-
-    public String getBuyerOpenid() {
-        return buyerOpenid;
-    }
-
-    public void setBuyerOpenid(String buyerOpenid) {
-        this.buyerOpenid = buyerOpenid;
-    }
-
-    public Double getOrderAmount() {
-        return orderAmount;
-    }
-
-    public void setOrderAmount(Double orderAmount) {
-        this.orderAmount = orderAmount;
-    }
-
-    public Object getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(Object orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public Object getPayStatus() {
-        return payStatus;
-    }
-
-    public void setPayStatus(Object payStatus) {
-        this.payStatus = payStatus;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
 }

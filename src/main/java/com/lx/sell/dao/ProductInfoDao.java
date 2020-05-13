@@ -62,4 +62,9 @@ public interface ProductInfoDao {
      */
     int deleteById(String productId);
 
+    /**
+     * 查询所有上架的商品
+     * @return      所有上架的商品
+     */
+    List<ProductInfo> findUpAll();
 }

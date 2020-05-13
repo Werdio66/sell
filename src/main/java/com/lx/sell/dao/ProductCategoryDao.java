@@ -2,9 +2,9 @@ package com.lx.sell.dao;
 
 import com.lx.sell.entity.ProductCategory;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * (ProductCategory)表数据库访问层
@@ -64,4 +64,10 @@ public interface ProductCategoryDao {
      */
     int deleteById(Integer categoryId);
 
+    /**
+     *  查询所有的商品类目信息
+     * @param categoryTypeList      类目编号
+     * @return  所有的商品类目信息
+     */
+    List<ProductCategory> findByCategoryTypeIn(@Param("categoryTypeList") Set<Integer> categoryTypeList);
 }

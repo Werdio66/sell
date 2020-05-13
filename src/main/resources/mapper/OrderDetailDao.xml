@@ -109,4 +109,10 @@
         delete from sell.order_detail where detail_id = #{detailId}
     </delete>
 
+    <select id="queryByOrderId" resultMap="OrderDetailMap">
+        select
+          detail_id, order_id, product_id, product_name, product_price, product_quantity, product_icon, create_time, update_time
+        from sell.order_detail
+        where order_id = #{orderId}
+    </select>
 </mapper>

@@ -69,6 +69,12 @@
             </if>
         </where>
     </select>
+    <select id="queryByBuyerOpenId" resultMap="OrderMasterMap">
+        select
+          order_id, buyer_name, buyer_phone, buyer_address, buyer_openid, order_amount, order_status, pay_status, create_time, update_time
+        from sell.order_master
+        where buyer_openid = #{buyerOpenId}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="orderId" useGeneratedKeys="true">

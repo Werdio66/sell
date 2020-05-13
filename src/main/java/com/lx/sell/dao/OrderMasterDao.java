@@ -62,4 +62,10 @@ public interface OrderMasterDao {
      */
     int deleteById(String orderId);
 
+    /**
+     *  通过买家的 openid 查找订单
+     * @param buyerOpenId       微信的 openid
+     * @return                  分页返回订单
+     */
+    List<OrderMaster> queryByBuyerOpenId(@Param("buyerOpenId") String buyerOpenId);
 }

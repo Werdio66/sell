@@ -2,6 +2,7 @@ package com.lx.sell.service;
 
 import com.lx.sell.entity.ProductCategory;
 import java.util.List;
+import java.util.Set;
 
 /**
  * (ProductCategory)表服务接口
@@ -52,4 +53,10 @@ public interface ProductCategoryService {
      */
     boolean deleteById(Integer categoryId);
 
+    /**
+     *  查询所有的商品类目信息
+     * @param categoryTypeList      类目编号
+     * @return  所有的商品类目信息
+     */
+    List<ProductCategory> findByCategoryTypeIn(Set<Integer> categoryTypeList);
 }

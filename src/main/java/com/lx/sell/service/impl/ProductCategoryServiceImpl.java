@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 
 /**
  * (ProductCategory)表服务实现类
@@ -75,5 +76,10 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public boolean deleteById(Integer categoryId) {
         return this.productCategoryDao.deleteById(categoryId) > 0;
+    }
+
+    @Override
+    public List<ProductCategory> findByCategoryTypeIn(Set<Integer> categoryTypeList) {
+        return productCategoryDao.findByCategoryTypeIn(categoryTypeList);
     }
 }

@@ -50,6 +50,16 @@
         </where>
     </select>
 
+    <select id="findByCategoryTypeIn" resultMap="ProductCategoryMap">
+         select
+          category_id, category_name, category_type, create_time, update_time
+        from sell.product_category
+        where category_type in
+        <foreach collection="categoryTypeList" open="(" close=")" separator="," item="type">
+            #{type}
+        </foreach>
+    </select>
+
     <!--新增所有列-->
     <insert id="insert" keyProperty="categoryId" useGeneratedKeys="true">
         insert into sell.product_category(category_name, category_type, create_time, update_time)

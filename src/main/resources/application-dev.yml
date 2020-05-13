@@ -5,9 +5,14 @@ spring:
     username: root
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
-
 mybatis:
   # 配置 mapper 文件的目录
   mapper-locations: classpath:mapper/*Dao.xml
 server:
-  port: 9999
+  port: 8080
+  servlet:
+    context-path: /sell
+logging:
+  level:
+    root: info
+    com.lx.sell: debug

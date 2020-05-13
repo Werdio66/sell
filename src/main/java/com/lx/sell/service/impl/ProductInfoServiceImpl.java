@@ -31,15 +31,12 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     }
 
     /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
+     * 查询所有的上架的商品信息
      * @return 对象列表
      */
     @Override
-    public List<ProductInfo> queryAllByLimit(int offset, int limit) {
-        return this.productInfoDao.queryAllByLimit(offset, limit);
+    public List<ProductInfo> findUpAll() {
+        return productInfoDao.findUpAll();
     }
 
     /**

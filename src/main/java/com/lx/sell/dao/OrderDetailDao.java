@@ -62,4 +62,10 @@ public interface OrderDetailDao {
      */
     int deleteById(String detailId);
 
+    /**
+     *  查询订单详情
+     * @param orderId       订单 id
+     * @return              订单详情
+     */
+    List<OrderDetail> queryByOrderId(String orderId);
 }

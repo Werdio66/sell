@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -36,5 +38,10 @@ class ProductCategoryServiceImplTest {
 
     @Test
     void deleteById() {
+    }
+
+    @Test
+    void find(){
+        productCategoryService.findByCategoryTypeIn(Collections.singleton(1)).forEach(System.out::println);
     }
 }
