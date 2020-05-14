@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.io.Serializable;
 
 /**
- *  买家信息
+ *  订单信息（买家信息 + 订单总和）
  *
  * @author Werdio丶
  * @since 2020-05-12 12:39:26

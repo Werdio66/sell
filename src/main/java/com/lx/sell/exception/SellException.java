@@ -16,4 +16,8 @@ public class SellException extends RuntimeException {
         super(result.getMsg());
         this.code = result.getCode();
     }
+
+    public SellException(String msg){
+        super(msg);
+    }
 }

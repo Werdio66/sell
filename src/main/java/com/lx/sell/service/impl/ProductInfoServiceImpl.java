@@ -1,7 +1,11 @@
 package com.lx.sell.service.impl;
 
+import com.github.pagehelper.PageInfo;
+import com.lx.sell.dto.CartDTO;
 import com.lx.sell.entity.ProductInfo;
 import com.lx.sell.dao.ProductInfoDao;
+import com.lx.sell.enums.Result;
+import com.lx.sell.exception.SellException;
 import com.lx.sell.service.ProductInfoService;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +41,48 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     @Override
     public List<ProductInfo> findUpAll() {
         return productInfoDao.findUpAll();
+    }
+
+    @Override
+    public PageInfo<ProductInfo> queryAll() {
+        return null;
+    }
+
+    @Override
+    public void increaseStock(List<CartDTO> cartDTOList) {
+        for (CartDTO cartDTO : cartDTOList) {
+            // 根据商品 id 查出商品
+            ProductInfo productInfo = productInfoDao.queryById(cartDTO.getProductId());
+            if (productInfo == null){
+                throw new SellException(Result.PRODUCT_NOT_EXIST);
+            }
+            // 将增加后的库存设置回去
+            productInfo.setProductStock(productInfo.getProductStock() + cartDTO.getProductQuantity());
+            // 更新商品
+            productInfoDao.update(productInfo);
+        }
+    }
+
+    @Override
+    public void decreaseStock(List<CartDTO> cartDTOList) {
+
+        for (CartDTO cartDTO : cartDTOList) {
+            // 根据商品 id 查出商品
+            ProductInfo productInfo = productInfoDao.queryById(cartDTO.getProductId());
+            if (productInfo == null){
+                throw new SellException(Result.PRODUCT_NOT_EXIST);
+            }
+            // 计算减后的库存
+            int result = productInfo.getProductStock() - cartDTO.getProductQuantity();
+
+            if (result < 0){
+                throw new SellException(Result.PRODUCT_STOCK_ERROR.getMsg() + " : " + productInfo.getProductName());
+            }
+            // 将减后的库存设置回去
+            productInfo.setProductStock(result);
+            // 更新商品
+            productInfoDao.update(productInfo);
+        }
     }
 
     /**

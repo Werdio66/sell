@@ -1,5 +1,7 @@
 package com.lx.sell.service;
 
+import com.github.pagehelper.PageInfo;
+import com.lx.sell.dto.CartDTO;
 import com.lx.sell.entity.ProductInfo;
 import java.util.List;
 
@@ -18,13 +20,6 @@ public interface ProductInfoService {
      * @return 实例对象
      */
     ProductInfo queryById(String productId);
-
-    /**
-     * 查询所有的上架的商品信息
-     *
-     * @return 对象列表
-     */
-    List<ProductInfo> findUpAll();
 
     /**
      * 新增数据
@@ -50,4 +45,30 @@ public interface ProductInfoService {
      */
     boolean deleteById(String productId);
 
+    /**
+     * 查询所有的上架的商品信息
+     *
+     * @return 对象列表
+     */
+    List<ProductInfo> findUpAll();
+
+    /**
+     *  查询所有的商品信息
+     * @return      所有商品
+     */
+    PageInfo<ProductInfo> queryAll();
+
+    /**
+     * 加库存
+     *
+     * @param cartDTOList 购物车
+     */
+    void increaseStock(List<CartDTO> cartDTOList);
+
+    /**
+     * 减库存
+     *
+     * @param cartDTOList 购物车
+     */
+    void decreaseStock(List<CartDTO> cartDTOList);
 }

@@ -78,8 +78,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="orderId" useGeneratedKeys="true">
-        insert into sell.order_master(buyer_name, buyer_phone, buyer_address, buyer_openid, order_amount, order_status, pay_status, create_time, update_time)
-        values (#{buyerName}, #{buyerPhone}, #{buyerAddress}, #{buyerOpenid}, #{orderAmount}, #{orderStatus}, #{payStatus}, #{createTime}, #{updateTime})
+        insert into sell.order_master(order_id, buyer_name, buyer_phone, buyer_address, buyer_openid, order_amount, order_status, pay_status, create_time, update_time)
+        values (#{orderId}, #{buyerName}, #{buyerPhone}, #{buyerAddress}, #{buyerOpenid}, #{orderAmount}, #{orderStatus}, #{payStatus}, #{createTime}, #{updateTime})
     </insert>
 
     <!--通过主键修改数据-->
