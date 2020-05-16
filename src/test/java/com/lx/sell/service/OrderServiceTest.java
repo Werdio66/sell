@@ -1,10 +1,13 @@
 package com.lx.sell.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lx.sell.dto.OrderDTO;
 import com.lx.sell.entity.OrderDetail;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +28,7 @@ class OrderServiceTest {
     void create() {
         OrderDTO orderDTO = new OrderDTO();
 
-        orderDTO.setBuyerName("买家");
+        orderDTO.setBuyerName("啦啦啦");
         orderDTO.setBuyerAddress("买家地址");
         orderDTO.setBuyerPhone("123456789012");
         orderDTO.setBuyerOpenid("11111");
@@ -38,7 +41,7 @@ class OrderServiceTest {
 
         OrderDetail o2 = new OrderDetail();
         o2.setProductId("2");
-        o2.setProductQuantity(9);
+        o2.setProductQuantity(1);
 
         orderDetailList.add(o1);
         orderDetailList.add(o2);
@@ -51,25 +54,38 @@ class OrderServiceTest {
 
     @Test
     void findOne() {
+        OrderDTO orderDTO = orderService.findOne("fe67f80b");
+        System.out.println(orderDTO);
     }
 
     @Test
     void findList() {
+        PageHelper.startPage(1, 1);
+        PageInfo<OrderDTO> pageInfo = orderService.findList("11111");
+        System.out.println(pageInfo);
+        System.out.println(pageInfo.getList());
+        System.out.println(pageInfo.getList().size());
     }
 
     @Test
     void cancel() {
+        OrderDTO orderDTO = orderService.findOne("fe67f80b");
+        OrderDTO cancel = orderService.cancel(orderDTO);
+        System.out.println(cancel);
     }
 
     @Test
     void finish() {
+        OrderDTO orderDTO = orderService.findOne("fe67f80b");
+        OrderDTO cancel = orderService.finish(orderDTO);
+        System.out.println(cancel);
     }
 
     @Test
     void paid() {
+        OrderDTO orderDTO = orderService.findOne("fe67f80b");
+        OrderDTO cancel = orderService.paid(orderDTO);
+        System.out.println(cancel);
     }
 
-    @Test
-    void testFindList() {
-    }
 }

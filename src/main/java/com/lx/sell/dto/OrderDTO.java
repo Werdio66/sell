@@ -1,6 +1,8 @@
 package com.lx.sell.dto;
 
 import com.lx.sell.entity.OrderDetail;
+import com.lx.sell.enums.OrderStatus;
+import com.lx.sell.enums.PayStatus;
 import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -39,11 +41,11 @@ public class OrderDTO {
     /**
      * 订单状态, 默认为 0, 新下单
      */
-    private Integer orderStatus;
+    private Integer orderStatus = OrderStatus.NEW.getCode();
     /**
      * 支付状态, 默认 0, 未支付
      */
-    private Integer payStatus;
+    private Integer payStatus = PayStatus.WAIT.getCode();
     /**
      * 创建时间
      */

@@ -26,7 +26,7 @@ public interface OrderService {
     OrderDTO findOne(String orderId);
 
     /**
-     * 查询订单列表
+     * 查询指定买家的订单列表
      * @param buyerOpenid       买家 openid
      * @return                  所有订单
      */
@@ -34,28 +34,22 @@ public interface OrderService {
 
     /**
      * 取消订单
-     * @param orderDTO
-     * @return
+     * @param orderDTO      修改前订单信息
+     * @return              修改后的 dto 对象
      */
     OrderDTO cancel(OrderDTO orderDTO);
 
     /**
      * 完结订单
-     * @param orderDTO
-     * @return
+     * @param orderDTO      修改前订单信息
+     * @return              修改后的 dto 对象
      */
     OrderDTO finish(OrderDTO orderDTO);
 
     /**
      * 支付订单
-     * @param orderDTO
-     * @return
+     * @param orderDTO      修改前订单信息
+     * @return              修改后的 dto 对象
      */
     OrderDTO paid(OrderDTO orderDTO);
-
-    /**
-     *  查询订单列表
-     * @return
-     */
-    PageInfo<OrderDTO> findList();
 }
