@@ -30,6 +30,12 @@ public enum Result {
     ORDER_PAY_UPDATE_FAIL(18, "订单支付更新失败"),
 
     ORDER_PAY_STATUS_FAIL(19, "订单支付状态不正确"),
+
+    ORDER_OWNER_ERROR(20, "当前用户不具备该权限"),
+
+    PARAM_ERROR(1, "参数错误"),
+
+    CART_EMPTY(2, "购物车为空"),
     ;
 
     private final Integer code;

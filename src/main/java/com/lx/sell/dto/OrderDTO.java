@@ -1,5 +1,6 @@
 package com.lx.sell.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.lx.sell.entity.OrderDetail;
 import com.lx.sell.enums.OrderStatus;
 import com.lx.sell.enums.PayStatus;
@@ -14,6 +15,7 @@ import java.util.List;
  * @author Werdio丶
  * @since 2020-05-13 17:52:13
  */
+//@JsonInclude(JsonInclude.Include.NON_NULL)   // 不返还为空字段
 @Data
 public class OrderDTO {
 

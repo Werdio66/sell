@@ -90,6 +90,7 @@ public class OrderServiceImpl implements OrderService {
         // 5. 扣库存
         productInfoService.decreaseStock(cartDTOList);
 
+        BeanUtils.copyProperties(orderMaster, orderDTO);
         return orderDTO;
     }
 

@@ -8,25 +8,23 @@ import com.lx.sell.service.ProductCategoryService;
 import com.lx.sell.service.ProductInfoService;
 import com.lx.sell.vo.ProductInfoVO;
 import com.lx.sell.vo.ProductVO;
-import com.lx.sell.vo.ResponseVO;
 import com.lx.sell.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * (ProductInfo)表控制层
+ * 买家商品
  *
  * @author Werdio丶
  * @since 2020-05-12 13:33:53
  */
 @RestController
 @RequestMapping("/buyer/product")
-public class BuyProductController {
+public class BuyerProductController {
     /**
      * 服务对象
      */
@@ -36,6 +34,9 @@ public class BuyProductController {
     @Autowired
     private ProductCategoryService productCategoryService;
 
+    /**
+     *  查询所有的商品
+     */
     @GetMapping("/list")
     public ResultVO<?> list(){
 

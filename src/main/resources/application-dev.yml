@@ -5,6 +5,9 @@ spring:
     username: root
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    # 不返还对象中为空的字段
+    default-property-inclusion: non_null
 mybatis:
   # 配置 mapper 文件的目录
   mapper-locations: classpath:mapper/*Dao.xml
