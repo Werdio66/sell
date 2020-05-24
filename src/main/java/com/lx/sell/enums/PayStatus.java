@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public enum PayStatus {
+public enum PayStatus implements CodeEnum {
 
     WAIT(0, "未支付"),
     SUCCESS(1, "支付完成");

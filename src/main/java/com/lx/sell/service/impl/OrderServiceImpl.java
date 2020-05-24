@@ -1,8 +1,6 @@
 package com.lx.sell.service.impl;
 
 import com.github.pagehelper.PageInfo;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
 import com.lx.sell.dao.OrderDetailDao;
 import com.lx.sell.dao.OrderMasterDao;
 import com.lx.sell.dto.CartDTO;
@@ -12,7 +10,6 @@ import com.lx.sell.entity.OrderMaster;
 import com.lx.sell.entity.ProductInfo;
 import com.lx.sell.enums.OrderStatus;
 import com.lx.sell.enums.PayStatus;
-import com.lx.sell.enums.ProductStatus;
 import com.lx.sell.enums.Result;
 import com.lx.sell.exception.SellException;
 import com.lx.sell.service.OrderService;
@@ -231,5 +228,28 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return orderDTO;
+    }
+
+    @Override
+    public PageInfo<OrderDTO> findListAll() {
+        // 查询该买家所有的订单
+        List<OrderMaster> orderMasterList = orderMasterDao.queryAll();
+
+        PageInfo<OrderMaster> pageInfo = new PageInfo<>(orderMasterList);
+        // 封装成 dto 对象
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+
+        for (OrderMaster orderMaster : pageInfo.getList()) {
+            OrderDTO orderDTO = new OrderDTO();
+            BeanUtils.copyProperties(orderMaster, orderDTO);
+            orderDTOList.add(orderDTO);
+        }
+
+        PageInfo<OrderDTO> dtoPageInfo = new PageInfo<>();
+        BeanUtils.copyProperties(pageInfo, dtoPageInfo);
+
+        dtoPageInfo.setList(orderDTOList);
+        // 返回分页对象
+        return dtoPageInfo;
     }
 }

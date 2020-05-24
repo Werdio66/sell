@@ -8,6 +8,9 @@ spring:
   jackson:
     # 不返还对象中为空的字段
     default-property-inclusion: non_null
+  freemarker:
+    cache: false
+    suffix: .ftl
 mybatis:
   # 配置 mapper 文件的目录
   mapper-locations: classpath:mapper/*Dao.xml
@@ -19,7 +22,12 @@ logging:
   level:
     root: info
     com.lx.sell: debug
-
 wechat:
   mpAppId: wxa61ed9308c33186d
   mpSecret: 3eb76073864cbb69492c814837d57fe4
+  mchId: 1483469312
+  mchKey: C5245D70627C1F8E9964D494B0735025
+  keyPath: /h5.p12
+  notifyUrl: http://sss
+pagehelper:
+  reasonable: true

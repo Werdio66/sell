@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public enum OrderStatus {
+public enum OrderStatus implements CodeEnum {
 
     NEW(0, "新订单"),
     FINISHED(1, "完成"),

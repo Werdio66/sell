@@ -28,7 +28,7 @@ class OrderServiceTest {
     void create() {
         OrderDTO orderDTO = new OrderDTO();
 
-        orderDTO.setBuyerName("啦啦啦");
+        orderDTO.setBuyerName("wd");
         orderDTO.setBuyerAddress("买家地址");
         orderDTO.setBuyerPhone("123456789012");
         orderDTO.setBuyerOpenid("11111");
@@ -88,4 +88,14 @@ class OrderServiceTest {
         System.out.println(cancel);
     }
 
+    @Test
+    void findListAll(){
+        PageHelper.startPage(5, 5);
+        PageInfo<OrderDTO> pageInfo = orderService.findListAll();
+        System.out.println("是否为首页 ：" + pageInfo.isIsFirstPage());
+        System.out.println("是否为尾页 ：" + pageInfo.isIsLastPage());
+        System.out.println("是否有上一页 ：" + pageInfo.isHasPreviousPage());
+        System.out.println("是否有下一页 ：" + pageInfo.isHasNextPage());
+        System.out.println(pageInfo);
+    }
 }

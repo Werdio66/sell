@@ -52,4 +52,9 @@ public interface OrderService {
      * @return              修改后的 dto 对象
      */
     OrderDTO paid(OrderDTO orderDTO);
+
+    /**
+     *  查询所有的订单
+     */
+    PageInfo<OrderDTO> findListAll();
 }
