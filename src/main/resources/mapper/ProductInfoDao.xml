@@ -76,10 +76,16 @@
         where product_status = 0
     </select>
 
+    <select id="queryWithType" resultMap="ProductInfoMap">
+        select
+          product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, category_type, create_time, update_time
+        from sell.product_info
+    </select>
+
     <!--新增所有列-->
     <insert id="insert" keyProperty="productId" useGeneratedKeys="true">
-        insert into sell.product_info(product_name, product_price, product_stock, product_description, product_icon, product_status, category_type, create_time, update_time)
-        values (#{productName}, #{productPrice}, #{productStock}, #{productDescription}, #{productIcon}, #{productStatus}, #{categoryType}, #{createTime}, #{updateTime})
+        insert into sell.product_info(product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, category_type, create_time, update_time)
+        values (#{productId}, #{productName}, #{productPrice}, #{productStock}, #{productDescription}, #{productIcon}, #{productStatus}, #{categoryType}, #{createTime}, #{updateTime})
     </insert>
 
     <!--通过主键修改数据-->

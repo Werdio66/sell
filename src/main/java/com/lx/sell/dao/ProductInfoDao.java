@@ -67,4 +67,10 @@ public interface ProductInfoDao {
      * @return      所有上架的商品
      */
     List<ProductInfo> findUpAll();
+
+    /**
+     *  多表查询，productInfo 和 productCategory
+     * @return
+     */
+    List<ProductInfo> queryWithType();
 }

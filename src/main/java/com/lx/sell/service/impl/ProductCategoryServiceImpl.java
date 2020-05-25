@@ -6,6 +6,7 @@ import com.lx.sell.service.ProductCategoryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -34,13 +35,11 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     /**
      * 查询多条数据
      *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
      * @return 对象列表
      */
     @Override
-    public List<ProductCategory> queryAllByLimit(int offset, int limit) {
-        return this.productCategoryDao.queryAllByLimit(offset, limit);
+    public List<ProductCategory> queryAll() {
+        return this.productCategoryDao.queryAll(null);
     }
 
     /**
@@ -51,6 +50,8 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      */
     @Override
     public ProductCategory insert(ProductCategory productCategory) {
+        productCategory.setCreateTime(LocalDateTime.now());
+        productCategory.setUpdateTime(LocalDateTime.now());
         this.productCategoryDao.insert(productCategory);
         return productCategory;
     }
@@ -63,6 +64,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      */
     @Override
     public ProductCategory update(ProductCategory productCategory) {
+        productCategory.setUpdateTime(LocalDateTime.now());
         this.productCategoryDao.update(productCategory);
         return this.queryById(productCategory.getCategoryId());
     }

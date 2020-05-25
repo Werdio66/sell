@@ -62,4 +62,8 @@ public interface SellerInfoDao {
      */
     int deleteById(String id);
 
+    /**
+     *  通过 openid 查询卖家信息
+     */
+    SellerInfo findByOpenid(String openid);
 }

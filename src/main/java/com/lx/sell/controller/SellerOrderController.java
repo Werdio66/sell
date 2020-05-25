@@ -2,6 +2,7 @@ package com.lx.sell.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.lx.sell.constant.UrlConstant;
 import com.lx.sell.dto.OrderDTO;
 import com.lx.sell.service.OrderService;
 import com.lx.sell.utils.JsonUtil;
@@ -59,7 +60,7 @@ public class SellerOrderController {
     }
 
     @GetMapping("/finish")
-    public String finish(@NotEmpty String orderId){
+    public String finish(@NotEmpty String orderId, Model model){
         log.info("【完结订单】orderId = {}", orderId);
 
         OrderDTO finish = orderService.finish(orderService.findOne(orderId));
@@ -67,11 +68,13 @@ public class SellerOrderController {
 
         Integer pageNum = 2;
 
-        return "forward:list?pageNum=" + pageNum;
+        model.addAttribute("url", "/sell/seller/order/list?pageNum=" + pageNum);
+
+        return "/common/success";
     }
 
     @GetMapping("/cancel")
-    public String cancel(@NotEmpty String orderId){
+    public String cancel(@NotEmpty String orderId, Model model){
         log.info("【取消订单】orderId = {}", orderId);
 
         OrderDTO cancel = orderService.cancel(orderService.findOne(orderId));
@@ -79,6 +82,8 @@ public class SellerOrderController {
 
         Integer pageNum = 2;
 
-        return "forward:list?pageNum=" + pageNum;
+        model.addAttribute("url", "/sell/seller/order/list?pageNum=" + pageNum);
+
+        return "/common/success";
     }
 }

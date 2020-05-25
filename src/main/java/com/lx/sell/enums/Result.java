@@ -13,6 +13,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Result {
 
+    PRODUCT_UPDATE_ERROR(10, "商品修改失败"),
+
     PRODUCT_NOT_EXIST(11, "商品不存在"),
 
     PRODUCT_STOCK_ERROR(12, "商品库存不足"),

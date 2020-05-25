@@ -4,12 +4,15 @@ import com.github.pagehelper.PageInfo;
 import com.lx.sell.dto.CartDTO;
 import com.lx.sell.entity.ProductInfo;
 import com.lx.sell.dao.ProductInfoDao;
+import com.lx.sell.enums.ProductStatus;
 import com.lx.sell.enums.Result;
 import com.lx.sell.exception.SellException;
 import com.lx.sell.service.ProductInfoService;
+import com.lx.sell.utils.KeyUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -31,7 +34,11 @@ public class ProductInfoServiceImpl implements ProductInfoService {
      */
     @Override
     public ProductInfo queryById(String productId) {
-        return this.productInfoDao.queryById(productId);
+        ProductInfo productInfo = productInfoDao.queryById(productId);
+        if (productInfo == null){
+            throw new SellException(Result.PRODUCT_NOT_EXIST);
+        }
+        return productInfo;
     }
 
     /**
@@ -45,7 +52,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Override
     public PageInfo<ProductInfo> queryAll() {
-        return null;
+        List<ProductInfo> productInfoList = productInfoDao.queryWithType();
+        return new PageInfo<>(productInfoList);
     }
 
     @Override
@@ -85,6 +93,48 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         }
     }
 
+    @Override
+    public ProductInfo onSave(String productId) {
+        ProductInfo productInfo = productInfoDao.queryById(productId);
+        if (productInfo == null){
+            throw new SellException(Result.PRODUCT_NOT_EXIST);
+        }
+
+        if (productInfo.getProductStatusEnum().getCode().equals(ProductStatus.UP.getCode())) {
+            throw new SellException("商品已经上架");
+        }
+
+        // 设置上架状态
+        productInfo.setProductStatus(ProductStatus.UP.getCode());
+
+        int row = productInfoDao.update(productInfo);
+        if (row <= 0){
+            throw new SellException(Result.PRODUCT_UPDATE_ERROR);
+        }
+        return productInfo;
+    }
+
+    @Override
+    public ProductInfo offSave(String productId) {
+        ProductInfo productInfo = productInfoDao.queryById(productId);
+        if (productInfo == null){
+            throw new SellException(Result.PRODUCT_NOT_EXIST);
+        }
+
+        if (productInfo.getProductStatusEnum().getCode().equals(ProductStatus.DOWN.getCode())) {
+            throw new SellException("商品已经下架");
+        }
+
+        // 设置下架状态
+        productInfo.setProductStatus(ProductStatus.DOWN.getCode());
+
+        int row = productInfoDao.update(productInfo);
+        if (row <= 0){
+            throw new SellException(Result.PRODUCT_UPDATE_ERROR);
+        }
+        return productInfo;
+    }
+
     /**
      * 新增数据
      *
@@ -93,6 +143,9 @@ public class ProductInfoServiceImpl implements ProductInfoService {
      */
     @Override
     public ProductInfo insert(ProductInfo productInfo) {
+        productInfo.setProductId(KeyUtil.getUniqureKey());
+        productInfo.setCreateTime(LocalDateTime.now());
+        productInfo.setUpdateTime(LocalDateTime.now());
         this.productInfoDao.insert(productInfo);
         return productInfo;
     }
@@ -105,6 +158,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
      */
     @Override
     public ProductInfo update(ProductInfo productInfo) {
+        productInfo.setUpdateTime(LocalDateTime.now());
         this.productInfoDao.update(productInfo);
         return this.queryById(productInfo.getProductId());
     }

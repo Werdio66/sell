@@ -88,4 +88,10 @@
         delete from sell.seller_info where id = #{id}
     </delete>
 
+    <select id="findByOpenid" resultMap="SellerInfoMap">
+        select
+          id, username, password, openid, create_time, update_time
+        from sell.seller_info
+        where openid = #{openid}
+    </select>
 </mapper>

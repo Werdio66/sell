@@ -1,5 +1,8 @@
 package com.lx.sell.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lx.sell.enums.ProductStatus;
+import com.lx.sell.utils.EnumUtil;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -42,7 +45,7 @@ public class ProductInfo implements Serializable {
      * 0 正常
      * 1 下架
      */
-    private Integer productStatus;
+    private Integer productStatus = ProductStatus.UP.getCode();
     /**
     * 类目编号
     */
@@ -55,4 +58,9 @@ public class ProductInfo implements Serializable {
     * 修改时间
     */
     private LocalDateTime updateTime;
+
+    @JsonIgnore
+    public ProductStatus getProductStatusEnum(){
+        return EnumUtil.getMsgByCode(productStatus, ProductStatus.class);
+    }
 }

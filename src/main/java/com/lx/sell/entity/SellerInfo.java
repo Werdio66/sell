@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 @Data
 public class SellerInfo implements Serializable {
+
     private static final long serialVersionUID = -12634912884533020L;
     
     private String id;
