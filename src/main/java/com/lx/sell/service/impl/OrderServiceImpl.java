@@ -14,6 +14,7 @@ import com.lx.sell.enums.Result;
 import com.lx.sell.exception.SellException;
 import com.lx.sell.service.OrderService;
 import com.lx.sell.service.ProductInfoService;
+import com.lx.sell.service.WebSocket;
 import com.lx.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -45,6 +46,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Resource
     private OrderMasterDao orderMasterDao;
+
+    @Autowired
+    private WebSocket webSocket;
 
     @Transactional
     @Override
@@ -88,6 +92,9 @@ public class OrderServiceImpl implements OrderService {
         productInfoService.decreaseStock(cartDTOList);
 
         BeanUtils.copyProperties(orderMaster, orderDTO);
+
+        // 发送消息
+        webSocket.sendMessage(orderId);
         return orderDTO;
     }
 

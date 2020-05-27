@@ -35,8 +35,13 @@ public class ResultVO<T> {
         return new ResultVO<>(0, "", data);
     }
 
-    public static ResultVO<?> error(String msg, Object data){
+    public static ResultVO<?> error(String msg, Object data) {
+
         return new ResultVO<>(1, msg, data);
+    }
+
+    public static ResultVO<?> error(Integer code, String msg){
+        return new ResultVO<>(code, msg, null);
     }
 
     public static ResultVO<?> error(String msg){
